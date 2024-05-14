@@ -1,7 +1,9 @@
 
 function DisplayCtrlPanel() {
     return (
-        <div>Display Ctrl Panel</div>
+        <div
+            className="display-ctrl-panel-container"
+        >Display Ctrl Panel</div>
     );
 }
 

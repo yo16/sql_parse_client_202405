@@ -1,7 +1,11 @@
 
+import "./LineageCanvas.css";
+
 function LineageCanvas() {
     return (
-        <div>Lineage Canvas</div>
+        <div
+            className="lineage-canvas-container"
+        >Lineage Canvas</div>
     );
 }
 
