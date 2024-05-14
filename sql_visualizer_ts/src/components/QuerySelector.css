@@ -1,0 +1,15 @@
+.query-selector-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.div-drop-zone {
+    border-width: 5px;
+    border-color: transparent;
+    border-radius: 10px;
+    padding: 10px;
+}
+.div-drag-active {
+    border-color: #33f9;
+    border-style: dashed;
+}
