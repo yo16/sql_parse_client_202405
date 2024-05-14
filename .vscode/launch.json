@@ -1,0 +1,18 @@
+{
+    // prLaunchTaskでnpm debugを起動
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "React起動",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/sql_visualizer_ts/src",
+            "preLaunchTask": "npm: debug - sql_visualizer_ts",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack:///./*": "${webRoot}/src/*"
+            }
+        }
+    ]
+}
