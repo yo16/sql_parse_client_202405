@@ -1,5 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+
+import { QueryEnterButton } from './QueryEnterButton';
 
 import "./QuerySelector.css";
 
@@ -10,6 +12,7 @@ interface QuerySelectorProps {
 function QuerySelector({
     onChangedQuery
 }: QuerySelectorProps) {
+    const [currentQuery, setCurrentQuery] = useState<string>("");
 
     // onDrop
     const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -18,14 +21,22 @@ function QuerySelector({
         const reader = new FileReader();
         reader.addEventListener("load", () => {
             if (typeof reader.result === "string" ) {
-                console.log(`DROPPED! ${reader.result}`);
+                //console.log(`DROPPED! ${reader.result}`);
+                setCurrentQuery(reader.result)
+                onChangedQuery(reader.result);
             }
         });
         reader.readAsText(f, "utf-8");
       })
-    }, []);
+    }, [onChangedQuery]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+    function handleOnEnterQuery(query: string) {
+        //console.log(`ENTERED! ${query}`);
+        setCurrentQuery(query);
+        onChangedQuery(query);
+    }
 
     return (
         <div
@@ -48,8 +59,13 @@ function QuerySelector({
             </div>
 
             {/* 手入力ボタンゾーン */}
+            <QueryEnterButton
+                onEnterQuery={handleOnEnterQuery}
+                defaultQuery={currentQuery}
+            />
+
             <div>
-                CLICK HERE and Enter SQL Query!
+                and Enter SQL Query!
             </div>
         </div>
     );

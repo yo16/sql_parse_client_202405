@@ -2,3 +2,16 @@
     display: flex;
     flex-direction: column;
 }
+
+button {
+    color: #fff;
+    background-color: #eb6100;
+    width: 120px;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 5px;
+}
+button:hover {
+    color: #fff;
+    background: #f56500;
+}
