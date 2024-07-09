@@ -26,7 +26,8 @@
 			"options": {
 				"env": {
 					"BROWSER": "none",
-					"SERVER_URL": "http://localhost:3001/sql"
+					"SERVER_URL": "http://localhost:3001/sql",
+					"NODE_ENV": "development"
 				}
 			}
 		}

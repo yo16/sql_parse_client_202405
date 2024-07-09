@@ -1,10 +1,10 @@
 
 import { useState } from "react";
+import { AST } from "node-sql-parser";
 
 import { QuerySelector } from "./QuerySelector";
 import { LineageCanvas } from "./LineageCanvas";
 import { DisplayCtrlPanel } from "./DisplayCtrlPanel";
-import { isTableInfoArray, TableInfo, isTableColumnConnectionArray, TableColumnConnection } from "./TypeDeffinition";
 
 
 import "./Contents.css";
@@ -26,9 +26,7 @@ type RequestOption = {
 
 function Contents() {
     // サーバーでパースした結果
-    const [stmts, setStmts] = useState<TableInfo[]>([]);
-    const [tableConns, setTableConnsStmts] = useState<TableColumnConnection[]>([]);
-    const [colConns, setColConns] = useState<TableColumnConnection[]>([]);
+    const [astList, setAstList] = useState<AST[]>([]);
 
     // クエリ変更時
     function handleOnChangeQuery(query: string) {
@@ -51,15 +49,10 @@ function Contents() {
                 if (Object.keys(json).length===0) {
                     return;
                 }
-                if(isTableInfoArray(json.statements)){
-                    setStmts(json.statements);
-                }
-                if(isTableColumnConnectionArray(json.tableConns)){
-                    setTableConnsStmts(json.tableConns);
-                }
-                if(isTableColumnConnectionArray(json.colConns)){
-                    setColConns(json.colConns);
-                }
+                setAstList(json.ast);
+            })
+            .catch((e) => {
+                console.error("Fetch Error", e);
             })
         ;
 
@@ -72,7 +65,9 @@ function Contents() {
             <QuerySelector
                 onChangedQuery={ handleOnChangeQuery }
             />
-            <LineageCanvas />
+            <LineageCanvas
+                astList={ astList }
+            />
             <DisplayCtrlPanel />
         </div>
     );
