@@ -9,8 +9,22 @@ import { SqlWiths } from "./SqlWiths";
 
 interface SqlSelectProps {
     select: NspSelect;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    setWidth: (w: number) => void;
+    setHeight: (h: number) => void;
 }
-function SqlSelect({ select }: SqlSelectProps) {
+function SqlSelect({
+    select,
+    x,
+    y,
+    width,
+    height,
+    setWidth,
+    setHeight,
+}: SqlSelectProps) {
     // column
     const columns: any[] | NspColumn[] = select.columns;
 
@@ -21,8 +35,8 @@ function SqlSelect({ select }: SqlSelectProps) {
     const withClauses: NspWith[] = select.with? select.with: [];
 
     return (
-        <g>
-            <rect x="0" y="0" width="100" height="100" fill="blue" />
+        <g transform={`translate(${x}, ${y})`}>
+            <rect x="0" y="0" width={width} height={height} fill="blue" />
             <SqlWiths withs={withClauses} />
             <SqlFroms froms={fromClauses} />
             <SqlColumns columns={columns} />
