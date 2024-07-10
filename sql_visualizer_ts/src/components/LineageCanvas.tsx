@@ -19,7 +19,8 @@ function LineageCanvas({ astList }: LineageCanvasProps) {
 
     // デフォルトの幅は平等、高さは元の高さのまま
     useEffect(() => {
-        setAstWidths(astList.map((a)=>(svgWidth-AST_PADDING*2)/(astList.length)));
+        // 幅は、左右とast同士の隙間を除いて、等分
+        setAstWidths(astList.map((a)=>(svgWidth - AST_PADDING*2 - AST_PADDING*(astList.length-1))/(astList.length)));
         setAstHeights(astList.map((a)=>(svgHeight-AST_PADDING*2)));
     }, [astList]);
 
@@ -38,9 +39,6 @@ function LineageCanvas({ astList }: LineageCanvasProps) {
         // svgのheightは、全部のheightの最大
         setSvgHeight(astHeights.reduce((acc, h) => (acc < h)? h: acc, svgHeight));
     }
-    console.log('astList', astList);
-    console.log('astWidths', astWidths);
-    console.log('astHeights', astHeights);
     
 
     return (

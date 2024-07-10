@@ -23,8 +23,6 @@ function SqlAst({
     setWidth,
     setHeight,
 }: SqlAstProps) {
-    console.log(`width: ${width}`);
-
     let component = (<></>);
     switch (ast.type) {
         case 'select':
